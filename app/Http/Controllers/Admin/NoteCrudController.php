@@ -56,7 +56,8 @@ class NoteCrudController extends CrudController
             'name'      => 'files', // The db column name
             'label'     => 'Files', // Table column heading
             'type'      => 'upload_multiple',
-            'prefix'    => 'storage/'
+            'prefix'    => 'storage/app/public/',
+            'disk'      => 'public',
         ]);
         
 
