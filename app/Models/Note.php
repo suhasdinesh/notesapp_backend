@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Note extends Model
 {
@@ -30,6 +32,18 @@ class Note extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public static function boot()
+    {
+        parent::boot();
+        
+        static::deleting(function($obj) {
+            if (count((array)$obj->files)) {
+                foreach ($obj->files as $file_path) {
+                    Storage::disk('public')->delete($file_path);
+                }
+            }
+        });
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
