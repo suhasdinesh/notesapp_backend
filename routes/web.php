@@ -19,3 +19,11 @@ Route::get('/', function () {
 
 Route::middleware('admin')->get('/storage/{slug}', [FileHandlerController::class,'HandleFile'])->where('slug', '.*');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/example',function(){
+    return view('example');
+});
